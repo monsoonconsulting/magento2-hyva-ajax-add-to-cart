@@ -1,0 +1,10 @@
+/.idea/
+/node_modules
+/*.*
+!/.gitignore
+!/CHANGELOG.md
+!/composer.json
+!/LICENSE.md
+!/README.md
+!/composer.json
+!/registration.php

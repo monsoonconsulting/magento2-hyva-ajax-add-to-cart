@@ -1,0 +1,25 @@
+{
+    "name": "monsoonconsulting/magento2-hyva-ajax-add-to-cart",
+    "description": "Adds Ajax Add to Cart functionality to Hyva themes",
+    "require": {
+        "php": "~7.4.0|~8.1.0"
+    },
+    "type": "magento2-module",
+    "license": [
+        "proprietary"
+    ],
+    "authors": [
+        {
+          "name": "Callan Zimmermann",
+          "email": "callan.zimmermann@monsoonconsulting.com"
+        }
+      ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Monsoon\\HyvaAjaxAddToCart\\": ""
+        }
+    }
+}
