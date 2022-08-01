@@ -11,6 +11,7 @@
         <checkout>
             <options>
                 <enable_ajax_add_to_cart>0</enable_ajax_add_to_cart>
+                <ajax_add_to_cart_delay>1000</ajax_add_to_cart_delay>
             </options>
         </checkout>
     </default>

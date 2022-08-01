@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Monsoon Consulting. All rights reserved.
+ * See LICENSE_MONSOON.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Monsoon\HyvaAjaxAddToCart\Model\ConfigInterface"
+        type="Monsoon\HyvaAjaxAddToCart\Model\Config" />
+</config>
