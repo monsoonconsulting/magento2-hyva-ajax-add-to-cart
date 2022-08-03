@@ -9,6 +9,7 @@
     <body>
         <referenceContainer name="before.body.end">
             <block name="monsoon.ajax.addtocart"
+                   class="Monsoon\HyvaAjaxAddToCart\Block\AddToCart"
                    template="Monsoon_HyvaAjaxAddToCart::hyva/script/addtocart.phtml"
                    ifconfig="checkout/options/enable_ajax_add_to_cart"/>
         </referenceContainer>

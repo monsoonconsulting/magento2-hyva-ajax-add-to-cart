@@ -5,11 +5,11 @@
  */
 declare(strict_types=1);
 
-use Magento\Framework\View\Element\Template;
+use Monsoon\HyvaAjaxAddToCart\Block\AddToCart;
 use Magento\Framework\Escaper;
 
 /**
- * @var Template $block
+ * @var AddToCart $block
  * @var Escaper $escaper
  */
 
@@ -24,6 +24,7 @@ use Magento\Framework\Escaper;
 <script>
     window.setAjaxCart = (selectors = '.product_addtocart_form, #product_addtocart_form', recursive = true) => {
         const addToCartForms = document.querySelectorAll(selectors);
+        const delay = parseInt('<?= $escaper->escapeJs($block->getDelay()) ?>', 10);
 
         addToCartForms.forEach(form => {
             form.addEventListener('submit', e => {
@@ -46,6 +47,7 @@ use Magento\Framework\Escaper;
 
                 button.prepend(loader);
                 button.classList.add('relative', 'is-loading');
+                button.disabled = true;
 
                 fetch(e.currentTarget.action, {
                     method: 'POST',
@@ -95,11 +97,12 @@ use Magento\Framework\Escaper;
                         setTimeout(() => {
                             loader.remove();
                             button.classList.remove('is-loading');
+                            button.disabled = false;
 
                             messages.forEach(message => {
                                 setMessage(message);
                             });
-                        }, 1000);
+                        }, delay);
                     });
             });
         });
