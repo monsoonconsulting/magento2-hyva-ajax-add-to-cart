@@ -21,6 +21,18 @@
                     <label>Enable AJAX Add to Cart</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="ajax_add_to_cart_delay"
+                       translate="label comment"
+                       type="text"
+                       sortOrder="110"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1"
+                       canRestore="1">
+                    <label>AJAX Add to Cart Delay</label>
+                    <comment>e.g. 1000 (in milliseconds)</comment>
+                    <validate>validate-number required-entry</validate>
+                </field>
             </group>
         </section>
     </system>
