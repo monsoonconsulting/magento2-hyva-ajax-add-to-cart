@@ -46,6 +46,7 @@ use Magento\Framework\Escaper;
 
                 button.prepend(loader);
                 button.classList.add('relative', 'is-loading');
+                button.disabled = true;
 
                 fetch(e.currentTarget.action, {
                     method: 'POST',
@@ -95,6 +96,7 @@ use Magento\Framework\Escaper;
                         setTimeout(() => {
                             loader.remove();
                             button.classList.remove('is-loading');
+                            button.disabled = false;
 
                             messages.forEach(message => {
                                 setMessage(message);
