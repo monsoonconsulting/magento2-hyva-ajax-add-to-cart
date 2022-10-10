@@ -59,7 +59,11 @@ use Magento\Framework\Escaper;
                 })
                     .then(res => {
                         if (!res.ok) {
-                            form.submit();
+                            return form.submit();
+                        }
+
+                        if (res.redirected) {
+                            return [];
                         }
 
                         return res.json();
