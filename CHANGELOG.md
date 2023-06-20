@@ -1,6 +1,11 @@
 # Changelog
 <!-- Refer to: https://keepachangelog.com/en/1.0.0/ -->
 
+## [1.1.3] 2023-20-06
+### Added
+- Added PHP 8.2 requirement
+### Fix
+- Fix issue with editing product
 ## [1.1.2] 2022-10-10
 ### Fix
 - Fix issue with editing product
