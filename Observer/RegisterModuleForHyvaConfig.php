@@ -1,11 +1,8 @@
 <?php
 /**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2022-present. All rights reserved.
- * This category is licensed per Magento install
- * See https://hyva.io/license
+ * Copyright © Monsoon Consulting. All rights reserved.
+ * See LICENSE_MONSOON.txt for license details.
  */
-
 declare(strict_types=1);
 
 namespace Monsoon\HyvaAjaxAddToCart\Observer;
@@ -14,16 +11,25 @@ use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
+/**
+ * Class RegisterModuleForHyvaConfig
+ */
 class RegisterModuleForHyvaConfig implements ObserverInterface
 {
-    private $componentRegistrar;
-
-    public function __construct(ComponentRegistrar $componentRegistrar)
-    {
-        $this->componentRegistrar = $componentRegistrar;
+    /**
+     * RegisterModuleForHyvaConfig constructor
+     *
+     * @param ComponentRegistrar $componentRegistrar
+     */
+    public function __construct(
+        private readonly ComponentRegistrar $componentRegistrar
+    ) {
     }
 
-    public function execute(Observer $event)
+    /**
+     * @inheritdoc
+     */
+    public function execute(Observer $event): void
     {
         $config = $event->getData('config');
         $extensions = $config->hasData('extensions') ? $config->getData('extensions') : [];
@@ -32,7 +38,6 @@ class RegisterModuleForHyvaConfig implements ObserverInterface
 
         $path = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
 
-        // Only use the path relative to the Magento base dir
         $extensions[] = ['src' => substr($path, strlen(BP) + 1)];
 
         $config->setData('extensions', $extensions);

@@ -15,16 +15,14 @@ use Magento\Store\Model\ScopeInterface;
  */
 class Config implements ConfigInterface
 {
-    /** @var ScopeConfigInterface */
-    private ScopeConfigInterface $scopeConfig;
-
     /**
+     * Config constructor
+     *
      * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig
+        private readonly ScopeConfigInterface $scopeConfig
     ) {
-        $this->scopeConfig = $scopeConfig;
     }
 
     /**
@@ -52,6 +50,21 @@ class Config implements ConfigInterface
     {
         return (string)$this->scopeConfig->getValue(
             self::XML_PATH_AJAX_ADD_TO_CART_DELAY,
+            ScopeInterface::SCOPE_STORE,
+            $scopeCode
+        );
+    }
+
+    /**
+     * Get Ajax Add To Cart Selectors
+     *
+     * @param null|int|string $scopeCode
+     * @return string
+     */
+    public function getAjaxAddToCartSelectors($scopeCode = null): string
+    {
+        return (string)$this->scopeConfig->getValue(
+            self::XML_PATH_AJAX_ADD_TO_CART_SELECTORS,
             ScopeInterface::SCOPE_STORE,
             $scopeCode
         );

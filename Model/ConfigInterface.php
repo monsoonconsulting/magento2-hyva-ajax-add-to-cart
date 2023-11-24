@@ -14,6 +14,7 @@ interface ConfigInterface
 {
     public const XML_PATH_ENABLE_AJAX_ADD_TO_CART = 'checkout/options/enable_ajax_add_to_cart';
     public const XML_PATH_AJAX_ADD_TO_CART_DELAY = 'checkout/options/ajax_add_to_cart_delay';
+    public const XML_PATH_AJAX_ADD_TO_CART_SELECTORS = 'checkout/options/ajax_add_to_cart_selectors';
 
     /**
      * Is the AJAX add to cart option enabled?
@@ -31,4 +32,12 @@ interface ConfigInterface
      * @return string
      */
     public function getAjaxAddToCartDelay($scopeCode = null): string;
+
+    /**
+     * Get Ajax Add To Cart Selects
+     *
+     * @param null|int|string $scopeCode
+     * @return string
+     */
+    public function getAjaxAddToCartSelectors($scopeCode = null): string;
 }

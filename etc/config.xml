@@ -6,12 +6,13 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <checkout>
             <options>
                 <enable_ajax_add_to_cart>0</enable_ajax_add_to_cart>
                 <ajax_add_to_cart_delay>1000</ajax_add_to_cart_delay>
+                <ajax_add_to_cart_selectors>.product_addtocart_form, #product_addtocart_form</ajax_add_to_cart_selectors>
             </options>
         </checkout>
     </default>

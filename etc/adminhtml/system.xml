@@ -6,32 +6,50 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="checkout">
             <group id="options">
                 <field id="enable_ajax_add_to_cart"
-                       translate="label"
-                       type="select"
-                       sortOrder="100"
-                       showInDefault="1"
-                       showInWebsite="1"
-                       showInStore="1"
-                       canRestore="1">
+                    translate="label"
+                    type="select"
+                    sortOrder="100"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                    canRestore="1">
                     <label>Enable AJAX Add to Cart</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="ajax_add_to_cart_delay"
-                       translate="label comment"
-                       type="text"
-                       sortOrder="110"
-                       showInDefault="1"
-                       showInWebsite="1"
-                       showInStore="1"
-                       canRestore="1">
+                    translate="label comment"
+                    type="text"
+                    sortOrder="110"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                    canRestore="1">
                     <label>AJAX Add to Cart Delay</label>
                     <comment>e.g. 1000 (in milliseconds)</comment>
                     <validate>validate-number required-entry</validate>
+                    <depends>
+                        <field id="enable_ajax_add_to_cart">1</field>
+                    </depends>
+                </field>
+                <field id="ajax_add_to_cart_selectors"
+                    translate="label comment"
+                    type="text"
+                    sortOrder="120"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                    canRestore="1">
+                    <label>AJAX Add to Cart Selectors</label>
+                    <comment>e.g .product_addtocart_form, #product_addtocart_form</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enable_ajax_add_to_cart">1</field>
+                    </depends>
                 </field>
             </group>
         </section>
