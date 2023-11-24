@@ -1,7 +1,7 @@
 # Changelog
 <!-- Refer to: https://keepachangelog.com/en/1.0.0/ -->
 
-### [1.2.0] 2023-24-11
+## [1.2.0] 2023-24-11
 ### Added
 - Allow selectors to be changed in admin
 ### Changed
