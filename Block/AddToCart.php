@@ -17,12 +17,7 @@ use Monsoon\HyvaAjaxAddToCart\Model\ConfigInterface;
 class AddToCart extends Template
 {
     /**
-     * @var ConfigInterface
-     */
-    private $config;
-
-    /**
-     * Upsell block contructor
+     * AddToCart contructor
      *
      * @param Template\Context $context
      * @param ConfigInterface $config
@@ -30,12 +25,10 @@ class AddToCart extends Template
      */
     public function __construct(
         Template\Context $context,
-        ConfigInterface $config,
+        private readonly ConfigInterface $config,
         array $data = []
     ) {
         parent::__construct($context, $data);
-
-        $this->config = $config;
     }
 
     /**
@@ -59,5 +52,15 @@ class AddToCart extends Template
     public function getDelay(): string
     {
         return $this->config->getAjaxAddToCartDelay();
+    }
+
+    /**
+     * Get Ajax Add To Cart Selectors
+     *
+     * @return string
+     */
+    public function getSelectors(): string
+    {
+        return $this->config->getAjaxAddToCartSelectors();
     }
 }

@@ -13,114 +13,107 @@ use Magento\Framework\Escaper;
  * @var Escaper $escaper
  */
 
-// phpcs:ignoreFile Generic.Files.LineLength.TooLong
+$selectors = $block->getSelectors() ?? '.product_addtocart_form, #product_addtocart_form';
+$delay = $block->getDelay() ?? 0;
 ?>
 <style>
 .is-loading > :not(.loader) {
     visibility: hidden;
 }
 </style>
-
 <script>
-    window.setAjaxCart = (selectors = '.product_addtocart_form, #product_addtocart_form', recursive = true) => {
-        const addToCartForms = document.querySelectorAll(selectors);
-        const delay = parseInt('<?= $escaper->escapeJs($block->getDelay()) ?>', 10);
+window.setAjaxCart = (selectors = '<?= $escaper->escapeJs($selectors) ?>', recursive = true) => {
+    const forms = document.querySelectorAll(selectors);
+    const delay = parseInt('<?= $escaper->escapeJs($delay) ?>', 10);
 
-        addToCartForms.forEach(form => {
-            form.addEventListener('submit', e => {
-                e.preventDefault();
+    forms.forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-                const data = new URLSearchParams(new FormData(form)),
-                    button = form.querySelector('button') ?
-                        form.querySelector('button') :
-                        document.getElementById('product-addtocart-button'),
-                    loader = document.createElement('div');
+            const formData = new URLSearchParams(new FormData(form));
+            const button = form.querySelector('button') ?
+                    form.querySelector('button') :
+                    document.getElementById('product-addtocart-button');
+            const loader = document.createElement('div');
 
-                loader.className = 'absolute inset-0 flex justify-center items-center loader';
-                loader.innerHTML = `
+            loader.className = 'absolute inset-0 flex justify-center items-center loader';
+            loader.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" xml:space="preserve" width="32" height="32">
-                    <path fill="#fff" d="M73 50c0-12.7-10.3-23-23-23S27 37.3 27 50m3.9 0c0-10.5 8.5-19.1 19.1-19.1S69.1 39.5 69.1 50">
-                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/>
+                    <path fill="#fff"
+                        d="M73 50c0-12.7-10.3-23-23-23S27 37.3 27 50m3.9 0c0-10.5 8.5-19.1 19.1-19.1S69.1 39.5 69.1 50">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                            from="0 50 50" to="360 50 50"
+                            repeatCount="indefinite"/>
                     </path>
                 </svg>
-                `;
+            `;
 
-                button.prepend(loader);
-                button.classList.add('relative', 'is-loading');
-                button.disabled = true;
+            button.prepend(loader);
+            button.classList.add('relative', 'is-loading');
+            button.disabled = true;
 
-                fetch(e.currentTarget.action, {
+            try {
+                const response = await fetch(e.currentTarget.action, {
                     method: 'POST',
-                    body: data,
+                    body: formData,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                         'X-Requested-With': 'XMLHttpRequest'
                     }
-                })
-                    .then(res => {
-                        if (!res.ok) {
-                            return form.submit();
-                        }
+                });
 
-                        if (res.redirected) {
-                            return [];
-                        }
+                if (!response.ok) {
+                    return form.submit();
+                }
 
-                        return res.json();
-                    })
-                    .then(data => {
-                        if (data.backUrl) {
-                            form.submit();
-                        }
+                if (response.redirected) {
+                    return window.location.href = response.url;
+                }
 
-                        if (recursive) {
-                            window.dispatchEvent(new CustomEvent('product-addtocart-success'));
-                        }
+                const data = await response.json();
 
-                        window.dispatchEvent(new CustomEvent('reload-customer-section-data'));
-                    })
-                    .catch(err => {
-                        window.dispatchEvent(new CustomEvent('product-addtocart-error'));
+                if (recursive) {
+                    window.dispatchEvent(new CustomEvent('product-addtocart-success'));
+                }
 
-                        setMessage({
-                            text:'<?= $escaper->escapeHtml(__('There was a problem adding your item to the cart.')) ?>',
-                            type: 'error'
-                        });
-                    })
-                    .finally(() => {
-                        try {
-                            var messages = hyva.getCookie('mage-messages');
-                            messages = messages ? JSON.parse(decodeURIComponent(messages).replace(/\+/g, ' ')) : [];
-                            document.cookie = 'mage-messages=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                return window.dispatchEvent(new CustomEvent('reload-customer-section-data'));
+            } catch (err) {
+                console.warn(err);
+                window.dispatchEvent(new CustomEvent('product-addtocart-error'));
 
-                        } catch (error) {
-                            console.warn('Error parsing Cookie Messages:', error);
-                            return;
-                        }
+                setMessage({
+                    text:'<?= $escaper->escapeJs(__('There was a problem adding your item to the cart.')) ?>',
+                    type: 'error'
+                });
+            } finally {
+                try {
+                    var messages = hyva.getCookie('mage-messages');
+                    messages = messages ? JSON.parse(decodeURIComponent(messages).replace(/\+/g, ' ')) : [];
+                    document.cookie = 'mage-messages=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 
-                        setTimeout(() => {
-                            loader.remove();
-                            button.classList.remove('is-loading');
-                            button.disabled = false;
+                } catch (error) {
+                    console.warn('Error parsing Cookie Messages:', error);
+                    return;
+                }
 
-                            messages.forEach(message => {
-                                setMessage(message);
-                            });
-                        }, delay);
-                    });
-            });
+                setTimeout(() => {
+                    loader.remove();
+                    button.classList.remove('is-loading');
+                    button.disabled = false;
+                }, delay);
+            }
         });
-    }
+    });
+}
 
-    /**
-     * Set Message
-     */
-    function setMessage(message) {
-        typeof window.dispatchMessages !== "undefined" && window.dispatchMessages(
-            [message], 5000
-        );
-    }
+/**
+ * Set Message
+ */
+function setMessage(message) {
+    typeof window.dispatchMessages !== "undefined" &&
+        window.dispatchMessages([message], 5000);
+}
 
-    /** Init on pageload */
-    window.setAjaxCart();
+/** Init on pageload */
+window.setAjaxCart();
 </script>
