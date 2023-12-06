@@ -15,6 +15,7 @@ interface ConfigInterface
     public const XML_PATH_ENABLE_AJAX_ADD_TO_CART = 'checkout/options/enable_ajax_add_to_cart';
     public const XML_PATH_AJAX_ADD_TO_CART_DELAY = 'checkout/options/ajax_add_to_cart_delay';
     public const XML_PATH_AJAX_ADD_TO_CART_SELECTORS = 'checkout/options/ajax_add_to_cart_selectors';
+    public const XML_PATH_AJAX_CART_OPEN_AFTER_ADD_TO_CART = 'checkout/options/ajax_cart_open_after_add_to_cart';
 
     /**
      * Is the AJAX add to cart option enabled?
@@ -40,4 +41,12 @@ interface ConfigInterface
      * @return string
      */
     public function getAjaxAddToCartSelectors($scopeCode = null): string;
+
+    /**
+     * If the cart should open after adding to cart
+     *
+     * @param null|int|string $scopeCode
+     * @return bool
+     */
+    public function isCartOpenAfterAddToCart($scopeCode = null): bool;
 }

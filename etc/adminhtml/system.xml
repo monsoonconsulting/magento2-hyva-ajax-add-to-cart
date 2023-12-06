@@ -51,6 +51,20 @@
                         <field id="enable_ajax_add_to_cart">1</field>
                     </depends>
                 </field>
+                <field id="ajax_cart_open_after_add_to_cart"
+                    translate="label"
+                    type="select"
+                    sortOrder="130"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                    canRestore="1">
+                    <label>Open Cart After Add To Cart</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_ajax_add_to_cart">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>

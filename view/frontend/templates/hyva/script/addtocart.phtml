@@ -76,6 +76,14 @@ window.setAjaxCart = (selectors = '<?= $escaper->escapeJs($selectors) ?>', recur
                     window.dispatchEvent(new CustomEvent('product-addtocart-success'));
                 }
 
+                <?php if ($block->isCartOpenAfterAddToCart()): ?>
+                    window.dispatchEvent(new CustomEvent('toggle-cart', {
+                        detail: {
+                            isOpen: true
+                        }
+                    }));
+                <?php endif; ?>
+
                 return window.dispatchEvent(new CustomEvent('reload-customer-section-data'));
             } catch (err) {
                 console.warn(err);
