@@ -63,4 +63,14 @@ class AddToCart extends Template
     {
         return $this->config->getAjaxAddToCartSelectors();
     }
+
+    /**
+     * If the cart should open after adding to cart
+     *
+     * @return bool
+     */
+    public function isCartOpenAfterAddToCart(): bool
+    {
+        return $this->config->isCartOpenAfterAddToCart();
+    }
 }

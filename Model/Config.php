@@ -69,4 +69,19 @@ class Config implements ConfigInterface
             $scopeCode
         );
     }
+
+    /**
+     * If the cart should open after adding to cart
+     *
+     * @param null|int|string $scopeCode
+     * @return bool
+     */
+    public function isCartOpenAfterAddToCart($scopeCode = null): bool
+    {
+        return (bool)$this->scopeConfig->isSetFlag(
+            self::XML_PATH_AJAX_CART_OPEN_AFTER_ADD_TO_CART,
+            ScopeInterface::SCOPE_STORE,
+            $scopeCode
+        );
+    }
 }
