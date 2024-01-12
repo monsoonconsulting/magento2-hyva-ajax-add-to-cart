@@ -1,10 +1,10 @@
 # Changelog
 <!-- Refer to: https://keepachangelog.com/en/1.0.0/ -->
 
-## Unreleased
+## [1.2.1] 2024-12-01
 ### Added
 - Ability for cart to open after add to cart
-
+- Follow backUrl
 ## [1.2.0] 2023-24-11
 ### Added
 - Allow selectors to be changed in admin
