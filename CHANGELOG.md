@@ -1,6 +1,9 @@
 # Changelog
 <!-- Refer to: https://keepachangelog.com/en/1.0.0/ -->
 
+## [1.2.2] 2024-12-01
+### Fix
+- Issue with variable
 ## [1.2.1] 2024-12-01
 ### Added
 - Ability for cart to open after add to cart

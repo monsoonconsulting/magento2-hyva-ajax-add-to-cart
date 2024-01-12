@@ -70,11 +70,11 @@ window.setAjaxCart = (selectors = '<?= $escaper->escapeJs($selectors) ?>', recur
                     return window.location.href = response.url;
                 }
 
+                const data = await response.json();
+
                 if (data.backUrl) {
                     return window.location.href = data.backUrl;
                 }
-
-                const data = await response.json();
 
                 if (recursive) {
                     window.dispatchEvent(new CustomEvent('product-addtocart-success'));
