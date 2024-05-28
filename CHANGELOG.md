@@ -1,6 +1,9 @@
 # Changelog
 <!-- Refer to: https://keepachangelog.com/en/1.0.0/ -->
 
+## [1.2.3] 2024-28-05
+### Added
+- Added PHP 8.3 requirement
 ## [1.2.2] 2024-12-01
 ### Fix
 - Issue with variable

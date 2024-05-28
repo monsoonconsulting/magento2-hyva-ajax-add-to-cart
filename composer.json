@@ -2,7 +2,7 @@
     "name": "monsoonconsulting/magento2-hyva-ajax-add-to-cart",
     "description": "Adds Ajax Add to Cart functionality to Hyva themes",
     "require": {
-        "php": "~8.1.0|~8.2.0"
+        "php": "~8.1.0|~8.2.0|~8.3.0"
     },
     "type": "magento2-module",
     "license": [
