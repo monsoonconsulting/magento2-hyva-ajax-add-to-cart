@@ -5,12 +5,14 @@
  */
 declare(strict_types=1);
 
+use Hyva\Theme\ViewModel\HyvaCsp;
 use Monsoon\HyvaAjaxAddToCart\Block\AddToCart;
 use Magento\Framework\Escaper;
 
 /**
  * @var AddToCart $block
  * @var Escaper $escaper
+ * @var HyvaCsp $hyvaCsp
  */
 
 $selectors = $block->getSelectors() ?? '.product_addtocart_form, #product_addtocart_form';
@@ -129,3 +131,4 @@ function setMessage(message) {
 /** Init on pageload */
 window.setAjaxCart();
 </script>
+<?php ($hyvaCsp ?? null)?->registerInlineScript() ?>
