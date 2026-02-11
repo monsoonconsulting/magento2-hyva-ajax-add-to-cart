@@ -1,6 +1,9 @@
 # Changelog
 <!-- Refer to: https://keepachangelog.com/en/1.0.0/ -->
 
+## [1.2.4] 2026-02-11
+### Added
+- Add compatibility with PHP 8.4
 ## [1.2.3] 2024-28-05
 ### Added
 - Added PHP 8.3 requirement
